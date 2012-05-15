@@ -1,1 +1,5 @@
-target/
+.metadata
+
+/JRKDatenbank/.settings
+/JRKDatenbank/.buildpath
+/JRKDatenbank/.project
