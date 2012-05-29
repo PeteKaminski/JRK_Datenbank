@@ -2,25 +2,30 @@
 
 class main extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
-	public function index()
-	{
-		$this->load->view('main');
-	}
+	function index()
+	 {
+	 $base_url = base_url();
+	 
+	//what the nav needs
+	 $navigation_data['navTab'] = "home";
+
+	 
+	 $this->load->model('model');
+
+	 
+ 	 $body_data['1'] = "1asdasdasdads";
+	 
+	//load the content variables
+	 $layout_data['content_navigation'] = $this->load->view('navigation', $navigation_data, true);
+ 	 $layout_data['content_body'] = $this->load->view('homePage', $body_data, true);
+	 
+	$this->load->view('main', $layout_data);
+	 }
+}
+function base_url($uri = '')
+{
+	$CI =& get_instance();
+	return $CI->config->base_url($uri);
 }
 
 /* End of file welcome.php */
