@@ -352,7 +352,7 @@ class User_model extends CI_Model {
 
 	public function deleteOldUser($data)
 	{
-		/*
+		/* fff
 		 * Bsp. fuer auffinden von Eintraegen, die aelter als 1 jahr sind
 		 * DELETE FROM User AS U WHERE User.LetzteAenderung < date_add(current_date, interval -1 year)
 		 */
