@@ -1,0 +1,33 @@
+html, body, div  {margin: 0; padding: 0;} 
+
+img#logojpg {
+position: absolute;
+top:  0em;
+left: 0em;
+}
+
+div#header
+	{
+		position: absolute;
+		background: #00909B;
+		height: 6em;	
+		width: 100%;
+		text-align: center;	
+		
+	}
+
+div#h1
+{
+	margin: 6em;
+	
+}
+
+div#content 
+	{
+	border: 1px solid black; 
+	position: absolute;
+	top: 6em;
+	margin-left: 15em;
+	width: 60em;
+
+	}
