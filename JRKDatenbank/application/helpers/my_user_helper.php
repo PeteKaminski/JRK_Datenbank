@@ -86,6 +86,16 @@ function printQualli($parameter)
 }
 
 
+function printFuehZeug ($parameter)
+{
+	$date['parameter'] = $parameter['date'];
+	echo form_checkbox($parameter['html']);
+	echo " vorgelegt am: ";
+	DayValue($date);
+	
+}
+
+
 function getuserformarray()
 	{ 
 		$userform = array(
@@ -351,6 +361,39 @@ function getuserformarray()
 					'maxlength' => '1000',
 					'rows' => '8',
 					'cols' => '50',
+				),
+			),
+			'Anmerkungen' => array(
+				'htmltype' => 'textarea',
+				'html' => array(
+					'name' => 'Anmerkungen:',
+					'id' => 'Anmerkungen',
+					'maxlength' => '10000',
+					'rows' => '8',
+					'cols' => '50',
+				),
+			),
+			'Fuehrerschein'=>array(
+				'htmltype' => 'checkbox',
+				'html' => array(
+					'name' => 'F&uuml;hrerschein:',
+					'id' => 'Fuehrerschein',
+					'checked' => TRUE,
+				)
+			),
+			'ErweitertesFuehrungszeugnis' => array(
+				'html' => array(
+					'name' => 'Erweitertes Fuehrungszeugnis:',
+					'id' => 'ErweitertesFuehrungszeugnis',
+					'checked' => true,
+					),
+				'htmltype' =>'function',
+				'funcname' => 'printFuehZeug',
+				'date' => array(
+					'name' => 'ErweitertesFuehrungszeugnis',
+					'tag' => '1',
+					'monat' => '1',
+					'jahr' => '2000',
 				),
 			),
 			'Besonderheiten' => array(
