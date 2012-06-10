@@ -1,6 +1,6 @@
 <?php
 class User_model extends CI_Model {
-	/*
+	/* git ist scheiße
 	 *  Das User-Model geht davon aus, dass alle Eingabe geprüft auf XXS und Sqlinjektion geprüft wurden
 	 * 
 	 */
