@@ -21,7 +21,7 @@ foreach ($userform as $element) {
 		echo form_label($element['html']['name'],$element['html']['id']);
 		echo "\n\t\t\t\t";
 
-	switch ($element['mytype']) {	  
+	switch ($element['htmltype']) {	  
 	    case 'text':
 	        echo form_input($element['html']);
 	        break;

@@ -9,7 +9,7 @@ echo form_open();
 	
 	$veranstaltungform = array(
 			'Name'=>array(
-				'mytype' => 'text',
+				'htmltype' => 'text',
 				'html' => array(
 					'name' => 'Name:',			//Name von oben
 					'id' => 'Name',				//Wie Name	
@@ -17,7 +17,7 @@ echo form_open();
 				)
 			),
 			'Traeger'=>array(
-				'mytype' => 'text',
+				'htmltype' => 'text',
 				'html' => array(
 					'name' => 'Traeger:',			//Name von oben
 					'id' => 'Traeger',				//Wie Name	
@@ -25,7 +25,7 @@ echo form_open();
 				)
 			),
 			'Thema'=>array(
-				'mytype' => 'text',
+				'htmltype' => 'text',
 				'html' => array(
 					'name' => 'Thema:',			//Name von oben
 					'id' => 'Thema',				//Wie Name	
@@ -33,7 +33,7 @@ echo form_open();
 				)
 			),
 			'Art'=>array(
-				'mytype' => 'text',
+				'htmltype' => 'text',
 				'html' => array(
 					'name' => 'Art:',			//Name von oben
 					'id' => 'Art',				//Wie Name	
@@ -41,7 +41,7 @@ echo form_open();
 				)
 			),
 			'DatumBegin' => array(
-				'mytype' => 'function',
+				'htmltype' => 'function',
 				'funcname' => 'DayValue',
 				'html' => array(
 					'name' => 'DatumBegin:',	//Anzeige Beschreibungsname 
@@ -55,7 +55,7 @@ echo form_open();
 				),
 			),		
 			'Besonderheiten' => array(
-				'mytype' => 'textarea',
+				'htmltype' => 'textarea',
 				'html' => array(
 					'name' => 'Besonderheiten:',
 					'id' => 'Besonderheiten',
@@ -82,7 +82,7 @@ foreach ($veranstaltungform as $element) {
 		echo form_label($element['html']['name'],$element['html']['id']);
 		echo "\n\t\t\t\t";
 
-	switch ($element['mytype']) {	  
+	switch ($element['htmltype']) {	  
 	    case 'text':
 	        echo form_input($element['html']);
 	        break;

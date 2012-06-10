@@ -9,7 +9,7 @@ echo form_open();
 	
 	$kreisverbandform = array(
 			'Name'=>array(
-				'mytype' => 'text',
+				'htmltype' => 'text',
 				'html' => array(
 					'name' => 'Name:',			//Name von oben
 					'id' => 'Name',				//Wie Name	
@@ -17,7 +17,7 @@ echo form_open();
 				)
 			),
 			'Strasse' => array(
-				'mytype' => 'text',
+				'htmltype' => 'text',
 				'html' => array(
 					'name' => 'Stra&szlig;e:',
 					'id' => 'Strasse',
@@ -25,7 +25,7 @@ echo form_open();
 				)
 			),
 			'HausNr' => array(
-				'mytype' => 'text',
+				'htmltype' => 'text',
 				'html' => array(
 					'name' => 'Hausnummer:',
 					'id' => 'HausNr',
@@ -33,7 +33,7 @@ echo form_open();
 				)
 			),
 			'Plz' => array(
-				'mytype' => 'text',
+				'htmltype' => 'text',
 				'html' => array(
 					'name' => 'PLZ:',
 					'id' => 'Plz',
@@ -41,7 +41,7 @@ echo form_open();
 				)
 			),
 			'Ort' => array(
-				'mytype' => 'text',
+				'htmltype' => 'text',
 				'html' => array(
 					'name' => 'Ort:',
 					'id' => 'Ort',
@@ -67,7 +67,7 @@ foreach ($kreisverbandform as $element) {
 		echo form_label($element['html']['name'],$element['html']['id']);
 		echo "\n\t\t\t\t";
 
-	switch ($element['mytype']) {	  
+	switch ($element['htmltype']) {	  
 	    case 'text':
 	        echo form_input($element['html']);
 	        break;

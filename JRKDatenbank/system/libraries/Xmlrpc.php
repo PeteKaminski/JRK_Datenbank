@@ -1209,7 +1209,7 @@ class XML_RPC_Message extends CI_Xmlrpc
 class XML_RPC_Values extends CI_Xmlrpc
 {
 	var $me		= array();
-	var $mytype	= 0;
+	var $htmltype	= 0;
 
 	public function __construct($val=-1, $type='')
 	{
@@ -1238,7 +1238,7 @@ class XML_RPC_Values extends CI_Xmlrpc
 	{
 		$typeof = $this->xmlrpcTypes[$type];
 
-		if ($this->mytype==1)
+		if ($this->htmltype==1)
 		{
 			echo '<strong>XML_RPC_Values</strong>: scalar can have only one value<br />';
 			return 0;
@@ -1262,7 +1262,7 @@ class XML_RPC_Values extends CI_Xmlrpc
 			}
 		}
 
-		if ($this->mytype == 2)
+		if ($this->htmltype == 2)
 		{
 			// adding to an array here
 			$ar = $this->me['array'];
@@ -1273,39 +1273,39 @@ class XML_RPC_Values extends CI_Xmlrpc
 		{
 			// a scalar, so set the value and remember we're scalar
 			$this->me[$type] = $val;
-			$this->mytype = $typeof;
+			$this->htmltype = $typeof;
 		}
 		return 1;
 	}
 
 	function addArray($vals)
 	{
-		if ($this->mytype != 0)
+		if ($this->htmltype != 0)
 		{
 			echo '<strong>XML_RPC_Values</strong>: already initialized as a [' . $this->kindOf() . ']<br />';
 			return 0;
 		}
 
-		$this->mytype = $this->xmlrpcTypes['array'];
+		$this->htmltype = $this->xmlrpcTypes['array'];
 		$this->me['array'] = $vals;
 		return 1;
 	}
 
 	function addStruct($vals)
 	{
-		if ($this->mytype != 0)
+		if ($this->htmltype != 0)
 		{
 			echo '<strong>XML_RPC_Values</strong>: already initialized as a [' . $this->kindOf() . ']<br />';
 			return 0;
 		}
-		$this->mytype = $this->xmlrpcTypes['struct'];
+		$this->htmltype = $this->xmlrpcTypes['struct'];
 		$this->me['struct'] = $vals;
 		return 1;
 	}
 
 	function kindOf()
 	{
-		switch($this->mytype)
+		switch($this->htmltype)
 		{
 			case 3:
 				return 'struct';

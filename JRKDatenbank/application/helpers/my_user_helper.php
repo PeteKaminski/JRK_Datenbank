@@ -54,11 +54,43 @@ function TelefonEmailValue($parameter)
 	echo form_input($parameter['html']);
 }
 
+function printPosition ($element)
+{
+	$positionArr = $element['parameter']['positionArr'];
+	$selected  = $element['parameter']['selected'];
+	$von['parameter'] = $element['parameter']['von'];
+	$bis['parameter'] = $element['parameter']['bis'];
+	
+	echo form_dropdown($element['html']['id'],$positionArr,$selected);
+	echo " von ";
+	DayValue($von);
+	echo " bis ";
+	DayValue($bis);
+}
+
+function printQualli($parameter)
+{
+	$selectedQualli = $parameter['selected'];
+	$quallifikationen = $parameter['quallifikationsArr'];
+	foreach($selectedQualli as $key => $element)
+	{
+		echo "\n<select name=\"".$parameter['html']['id'].$key."\">\n";
+		foreach($quallifikationen as $keyq => $qualli) {
+			echo "\t<option value=\"". $qualli ."\""; 
+			if ($element == $keyq) //wenn der index des qualliarrays gleich dem aktuellem selected element ist.
+			 	echo ' selected="selected" ';
+			echo ">". $qualli ."</option>\n";
+		}
+		echo "</select></br>\n"; 
+	}
+}
+
+
 function getuserformarray()
 	{ 
 		$userform = array(
 			'Foermlich'=>array(
-				'mytype' => 'checkbox',
+				'htmltype' => 'checkbox',
 				'html' => array(
 					'name' => 'F&ouml;rmlich:',
 					'id' => 'foermlich',
@@ -66,15 +98,16 @@ function getuserformarray()
 				)
 			),
 			'Name'=>array(
-				'mytype' => 'text',
+				'htmltype' => 'text',
 				'html' => array(
 					'name' => 'Name:',
 					'id' => 'Name',
+					'value' => 'Walter',
 					'maxlength' => '100',
 				)
 			),
 			'Vorname' => array(
-				'mytype' => 'text',
+				'htmltype' => 'text',
 				'html' => array(
 					'name' => 'Vorname:',
 					'id' => 'Vorname',
@@ -82,7 +115,7 @@ function getuserformarray()
 				)
 			),
 			'Strasse' => array(
-				'mytype' => 'text',
+				'htmltype' => 'text',
 				'html' => array(
 					'name' => 'Stra&szlig;e:',
 					'id' => 'Strasse',
@@ -90,7 +123,7 @@ function getuserformarray()
 				)
 			),
 			'HausNr' => array(
-				'mytype' => 'text',
+				'htmltype' => 'text',
 				'html' => array(
 					'name' => 'Hausnummer:',
 					'id' => 'HausNr',
@@ -98,7 +131,7 @@ function getuserformarray()
 				)
 			),
 			'Plz' => array(
-				'mytype' => 'text',
+				'htmltype' => 'text',
 				'html' => array(
 					'name' => 'PLZ:',
 					'id' => 'Plz',
@@ -106,7 +139,7 @@ function getuserformarray()
 				)
 			),
 			'Ort' => array(
-				'mytype' => 'text',
+				'htmltype' => 'text',
 				'html' => array(
 					'name' => 'Ort:',
 					'id' => 'Ort',
@@ -114,7 +147,7 @@ function getuserformarray()
 				)
 			),
 			'Bezirk' => array(
-				'mytype' => 'text',
+				'htmltype' => 'text',
 				'html' => array(
 					'name' => 'Bezirk:',
 					'id' => 'Bezirk',
@@ -122,7 +155,7 @@ function getuserformarray()
 				)
 			),
 			'Geburtstag' => array(
-				'mytype' => 'function',
+				'htmltype' => 'function',
 				'html' => array(
 					'name' => 'Geburtstag:',
 					'id' => 'geburtstag',
@@ -136,7 +169,7 @@ function getuserformarray()
 				),
 			),
 			'Geschlecht' => array(
-				'mytype' => 'function',
+				'htmltype' => 'function',
 				'html' => array(
 					'name' => 'Geschlecht:',
 					'id' => 'geschlecht',
@@ -152,7 +185,7 @@ function getuserformarray()
 				),
 			),
 			'Beruf' => array(
-				'mytype' => 'text',
+				'htmltype' => 'text',
 				'html' => array(
 					'name' => 'Beruf:',
 					'id' => 'Beruf',
@@ -160,7 +193,7 @@ function getuserformarray()
 				)
 			),
 			'Arbeitszeit' => array(
-				'mytype' => 'text',
+				'htmltype' => 'text',
 				'html' => array(
 					'name' => 'Arbeitszeit:',
 					'id' => 'Arbeitszeit',
@@ -168,7 +201,7 @@ function getuserformarray()
 				)
 			),
 			'TelefonNr0' => array(
-				'mytype' => 'function',
+				'htmltype' => 'function',
 				'funcname' => 'TelefonEmailValue',
 				'html' => array(
 					'name' => 'Telefonnummer:',
@@ -183,7 +216,7 @@ function getuserformarray()
 				'selected' => 'Privat',
 			),
 			'Email0' => array(
-				'mytype' => 'function',
+				'htmltype' => 'function',
 				'funcname' => 'TelefonEmailValue',
 				'html' => array(
 					'name' => 'Email:',
@@ -198,7 +231,7 @@ function getuserformarray()
 				'selected' => 'Privat',
 			),
 			'Facebook' => array(
-				'mytype' => 'text',
+				'htmltype' => 'text',
 				'html' => array(
 					'name' => 'Facebook:',
 					'id' => 'Facebook',
@@ -206,7 +239,7 @@ function getuserformarray()
 				)
 			),
 			'BevorzugteKommunikation' => array(
-				'mytype' => 'dropdown',
+				'htmltype' => 'dropdown',
 				'html' => array(
 					'name' => 'Bevorzugte Kommunikation:',
 					'id' => 'BevorzugteKommunikation',
@@ -220,7 +253,7 @@ function getuserformarray()
 				'selected' => 'Email',
 			),
 			'MitgliedSeid' => array(
-				'mytype' => 'function',
+				'htmltype' => 'function',
 				'html' => array(
 					'name' => 'Mitglied seid:',
 					'id' => 'MitgliedSeid',
@@ -234,7 +267,7 @@ function getuserformarray()
 				),
 			),
 			'Kreisverband' => array(
-				'mytype' => 'dropdown',
+				'htmltype' => 'dropdown',
 				'html' => array(
 					'name' => 'Kreisverband:',
 					'id' => 'Kreisverband',
@@ -246,18 +279,90 @@ function getuserformarray()
 				),
 				'selected' => '4',
 			),
+			'Position1' => array(
+				'html' => array(
+					'name' => 'Position:',
+					'id' => 'Position1',
+					),
+				'htmltype' =>'function',
+				'funcname' => 'printPosition',
+				'parameter' =>array(
+					'positionArr' => array(
+						'1' => 'JRKP',
+						'2' => 'Gruppenführer',
+						'3' => 'Erste Hilfe',
+						),
+					'selected' => '2',
+					'von' => array(
+						'name' => 'Position1von',
+						'tag' => '1',
+						'monat' => '1',
+						'jahr' => '2000',
+					),
+					'bis' => array(
+						'name' => 'Position2bis',
+						'tag' => '1',
+						'monat' => '1',
+						'jahr' => '2000',
+					),
+				),
+			),
+			'Quallifikation' => array(
+				'htmltype' => 'function',
+				'funcname' => 'printQualli',
+				'html' => array(
+					'name' => 'Quallifikation:',
+					'id' => 'Quallifikation',
+				),
+				'quallifikationsArr' => array(
+					'1' => 'lala',
+					'2' => 'lata',
+					'3' => 'tratra',
+					'4' => 'hihi',
+				),
+				'selected' => array(
+					'1' =>	'2',
+					'2' =>  '4',
+				),
+			),
+			'IQuallifikation' => array(
+				'htmltype' => 'function',
+				'funcname' => 'printQualli',
+				'html' => array(
+					'name' => 'Intressierte Quallifikationen:',
+					'id' => 'IQuallifikation',
+				),
+				'quallifikationsArr' => array(
+					'1' => 'lala',
+					'2' => 'lata',
+					'3' => 'tratra',
+					'4' => 'hihi',
+				),
+				'selected' => array(
+					'1' =>	'2',
+					'2' =>  '4',
+				),
+			),
+			'Faehigkeiten' => array(
+				'htmltype' => 'textarea',
+				'html' => array(
+					'name' => 'F&auml;higkeiten:',
+					'id' => 'Faehigkeiten',
+					'maxlength' => '1000',
+					'rows' => '8',
+					'cols' => '50',
+				),
+			),
 			'Besonderheiten' => array(
-				'mytype' => 'textarea',
+				'htmltype' => 'textarea',
 				'html' => array(
 					'name' => 'Besonderheiten:',
 					'id' => 'Besonderheiten',
 					'maxlength' => '1000',
-					'rows' => '20',
-					'cols' => '50'
-				)
-			),
-			
-			
+					'rows' => '8',
+					'cols' => '50',
+				),
+			),			
 		);
 	return $userform;
 		
