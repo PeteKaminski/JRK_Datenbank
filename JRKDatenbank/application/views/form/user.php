@@ -5,11 +5,11 @@ echo validation_errors();
 $this->load->helper('form');
 $this->load->helper('MY_user_helper');
 
-echo form_open()
+echo form_open('main/formularUser')
 
 ?>
 
-<form method="post" action="<?php echo ""; ?>">
+<!-- <form method="post" action="<?php echo ""; ?>"> -->
 <div class="eingabe">
 
 <?php echo form_fieldset('Pers&ouml;nliche Daten'); 

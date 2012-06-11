@@ -299,7 +299,7 @@ function getuserformarray()
 				'parameter' =>array(
 					'positionArr' => array(
 						'1' => 'JRKP',
-						'2' => 'Gruppenführer',
+						'2' => 'Gruppenf&uuml;hrer',
 						'3' => 'Erste Hilfe',
 						),
 					'selected' => '2',

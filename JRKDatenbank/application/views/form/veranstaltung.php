@@ -1,11 +1,9 @@
 <h3>Hinzuf&uuml;gen einer Veranstaltung.</h3>
 
 <?php 
-echo validation_errors(); 
+//echo validation_errors(); 
 $this->load->helper('form');
 $this->load->helper('MY_user_helper');
-
-echo form_open();
 	
 	$veranstaltungform = array(
 			'Name'=>array(
@@ -22,6 +20,7 @@ echo form_open();
 					'name' => 'Traeger:',			//Name von oben
 					'id' => 'Traeger',				//Wie Name	
 					'maxlength' => '100',		//Zeichenanzahl
+					'value' => 'Senat',
 				)
 			),
 			'Thema'=>array(
@@ -32,12 +31,49 @@ echo form_open();
 					'maxlength' => '100',		//Zeichenanzahl
 				)
 			),
-			'Art'=>array(
+			'ArtMassnahme' => array(
+				'htmltype' => 'dropdown',
+				'html' => array(
+					'name' => 'Art der Massnahme:',
+					'id' => 'ArtMassnahme',
+				),
+				'values' => array(
+					'1' => 'Kurs',
+					'2' => 'Internationale Begegnung',
+					'3' => 'Ferienmassnahme',
+				),
+				'selected' => '1',
+			),
+			'Strasse' => array(
 				'htmltype' => 'text',
 				'html' => array(
-					'name' => 'Art:',			//Name von oben
-					'id' => 'Art',				//Wie Name	
-					'maxlength' => '100',		//Zeichenanzahl
+					'name' => 'Strasse:',
+					'id' => 'Strasse',
+					'maxlength' => '100',
+				)
+			),
+			'HausNr' => array(
+				'htmltype' => 'text',
+				'html' => array(
+					'name' => 'Hausnummer:',
+					'id' => 'HausNr',
+					'maxlength' => '100',
+				)
+			),
+			'Plz' => array(
+				'htmltype' => 'text',
+				'html' => array(
+					'name' => 'PLZ:',
+					'id' => 'Plz',
+					'maxlength' => '100',
+				)
+			),
+			'Ort' => array(
+				'htmltype' => 'text',
+				'html' => array(
+					'name' => 'Ort:',
+					'id' => 'Ort',
+					'maxlength' => '100',
 				)
 			),
 			'DatumBegin' => array(
@@ -53,25 +89,85 @@ echo form_open();
 					'monat' => '1',				//voreingestellter monat
 					'jahr' => '2000',			//voreingestellter jahr
 				),
-			),		
+			),
+			'DatumEnde' => array(
+				'htmltype' => 'function',
+				'funcname' => 'DayValue',
+				'html' => array(
+					'name' => 'DatumEnde:',		//Anzeige Beschreibungsname 
+					'id' => 'DatumEnde',		//wie name nur kleingeschrieben
+				),
+				'parameter' =>array(
+					'name' => 'DatumEnde',		//Wie Oben
+					'tag' => '1',				//voreingestellter Tag
+					'monat' => '1',				//voreingestellter monat
+					'jahr' => '2000',			//voreingestellter jahr
+				),
+			),
+						'MaxTeilnehmer' => array(
+				'htmltype' => 'text',
+				'html' => array(
+					'name' => 'Maximale Teilnehmer:',
+					'id' => 'MaxTeilnehmer',
+					'maxlength' => '100',
+				),
+			),
+			'Leistung' => array(
+				'htmltype' => 'text',
+				'html' => array(
+					'name' => 'Leistung:',
+					'id' => 'Leistung',
+					'maxlength' => '1000',
+				),
+			),
+			'TeilnehmerBeitrag' => array(
+				'htmltype' => 'text',
+				'html' => array(
+					'name' => 'Teilnehmer Beitrag:',
+					'id' => 'TeilnehmerBeitrag',
+					'maxlength' => '10',
+				),
+			),
 			'Besonderheiten' => array(
 				'htmltype' => 'textarea',
 				'html' => array(
 					'name' => 'Besonderheiten:',
 					'id' => 'Besonderheiten',
 					'maxlength' => '1000', 		//Zeichenanzahl
-					'rows' => '20', 			// Zeilen
+					'rows' => '8', 			// Zeilen
 					'cols' => '50'  			// Spalten
-			)
-		)
+				),
+			),
+
 		);
 
 ?>
 
+<script type="text/javascript">
+function chkFormular () {
+  if (document.Formular.Name.value == "") {
+    alert("Bitte Namen der Veranstaltung angeben!");
+    document.Formular.Name.focus();
+    return false;
+  }
+  if (document.Formular.Traeger.value == "") {
+    alert("Bitte Träger angeben!");
+    document.Formular.Traeger.focus();
+    return false;
+  }
+}
+</script>
 
+<?php
+ 
+$attributs = array('name' => 'Formular', 'onsubmit' => 'return chkFormular()');
 
-<form method="post" action="<?php echo ""; ?>">
+echo form_open('main/datenErfolg',$attributs);
+?>
+
+<!-- <form method="post" action="<?php echo ""; ?>"> -->
 <div class="eingabe">
+
 
 <?php echo form_fieldset('Veranstaltungs Daten'); 
   

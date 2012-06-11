@@ -33,8 +33,8 @@ class main extends CI_Controller {
 		$this->load->helper('MY_user_helper');
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('name', 'Name', 'required');
-		$this->form_validation->set_rules('vorname', 'Vorname', 'required');
+		$this->form_validation->set_rules('Name', 'Name', 'required');
+		$this->form_validation->set_rules('Vorname', 'Vorname', 'required');
 		
 		$userdaten['userform']=getuserformarray();
 		
@@ -54,27 +54,23 @@ class main extends CI_Controller {
 	
 	function formularVeranstaltung()
 	{
-		$this->load->helper(array('form', 'url'));
-		$this->load->helper('MY_user_helper');
+		$this->load->helper(array('url'));
+
 		
-		$this->load->library('form_validation');
-		
-		$data['userform']=getuserformarray();
-		
-		if ($this->form_validation->run() == FALSE)
-		{
-			//load the content variables
- 			$this->layout_data['content'] = $this->load->view('form/veranstaltung', NULL, true); //Welches Content File geladen werden soll 
-			$this->load->view('main', $this->layout_data);
-		}
-		else
-		{
-			//load the content variables
- 			$this->layout_data['content'] = $this->load->view('form/erfolg', NULL, true); //Welches Content File geladen werden soll 
-			$this->load->view('main', $this->layout_data);
-		}
-		
+
+		//load the content variables
+ 		$this->layout_data['content'] = $this->load->view('form/veranstaltung', NULL, true); //Welches Content File geladen werden soll 
+		$this->load->view('main', $this->layout_data);
+
+
 	}
+	
+	function datenErfolg()
+	{
+		$this->layout_data['content'] = $this->load->view('form/erfolg', NULL, true); //Welches Content File geladen werden soll 
+		$this->load->view('main', $this->layout_data);
+	
+	} 
 	
 	function formularKreisverband()
 	{
