@@ -24,6 +24,13 @@ class main extends CI_Controller {
  		$this->layout_data['content'] = $this->load->view('overview', NULL, true); //Welches Content File geladen werden soll 
 		$this->load->view('main', $this->layout_data);
 	}
+
+	function testdb()
+	{
+		$this->load->model('User_model');
+		$this->layout_data['content'] = $this->load->view('test_db', NULL, true); //Welches Content File geladen werden soll 
+		$this->load->view('main', $this->layout_data);
+	}
 	
 	
 	// Ruf das UserFormular zum anlegen von Mitgliedern oder zum Ändern von Mitglieder Daten auf
