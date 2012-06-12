@@ -67,31 +67,10 @@ class main extends CI_Controller {
 		$this->load->helper('MY_user_helper');
 		$this->load->library('form_validation');
 		
-		$_POST = array(
-			'Name' => 'rENE	',
-		    'Traeger' => 'Senat',
-		    'Thema' => '',
-		    'ArtMassnahme' => '1',
-		    'Strasse' => '',
-		    'HausNr' => '',
-		    'PLZ' => '',
-		    'Ort' => '',
-		    'DatumBegintag' => '1',
-		    'DatumBeginmonat' => '1',
-		    'DatumBeginjahr' => '2000',
-		    'DatumEndetag' => '1',
-		    'DatumEndemonat' => '1',
-		    'DatumEndejahr' => '2000',
-		    'MaxTeilnehmer' => '',
-		    'Leistung' => '',
-		    'TeilnehmerBeitrag' => '',
-		    'Besonderheiten' => '',
-		    'speichern' => '',
-		);
-		
 		$this->form_validation->set_rules('Name', 'Name', 'required');
 		$this->form_validation->set_rules('Traeger', 'Traeger', 'required');
 		$this->form_validation->set_rules('Thema', 'Thema', 'required');
+		$this->form_validation->set_rules('ArtMassnahme', 'ArtMassnahme', 'required');
 
 		if ($this->form_validation->run() == FALSE)
 		{

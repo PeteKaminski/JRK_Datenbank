@@ -5,8 +5,56 @@
 $this->load->helper('form');
 $this->load->helper('MY_user_helper');
 	
-	$vdata['Name'] = set_value('Name');
+if ($VeranstaltungID != 'new')
+{
+	echo 'ID nicht vorhanden.';
 	
+/*	$vdata = array(
+		'Name' => set_value('Name'),
+	    'Traeger' => set_value('Traeger'),
+	    'Thema' => set_value('Thema'),
+	    'ArtMassnahme' => set_value('ArtMassnahme'),
+	    'Strasse' => set_value('Strasse'),
+	    'HausNr' => set_value('HausNr'),
+	    'PLZ' => set_value('PLZ'),
+	    'Ort' => set_value('Ort'),
+	    'DatumBegintag' => set_value('DatumBegintag'),
+	    'DatumBeginmonat' => set_value('DatumBeginmonat'),
+	    'DatumBeginjahr' => set_value('DatumBeginjahr'),
+	    'DatumEndetag' => set_value('DatumEndetag'),
+	    'DatumEndemonat' => set_value('DatumEndemonat'),
+	    'DatumEndejahr' => set_value('DatumEndejahr'),
+	    'MaxTeilnehmer' => set_value('MaxTeilnehmer'),
+	    'Leistung' => set_value('Leistung'),
+	    'TeilnehmerBeitrag' => set_value('TeilnehmerBeitrag'),
+	    'Besonderheiten' => set_value('Besonderheiten'),
+	    );
+ */
+}
+else 
+{
+	$vdata = array(
+		'Name' => set_value('Name'),
+	    'Traeger' => set_value('Traeger'),
+	    'Thema' => set_value('Thema'),
+	    'ArtMassnahme' => set_value('ArtMassnahme'),
+	    'Strasse' => set_value('Strasse'),
+	    'HausNr' => set_value('HausNr'),
+	    'PLZ' => set_value('PLZ'),
+	    'Ort' => set_value('Ort'),
+	    'DatumBegintag' => set_value('DatumBegintag'),
+	    'DatumBeginmonat' => set_value('DatumBeginmonat'),
+	    'DatumBeginjahr' => set_value('DatumBeginjahr'),
+	    'DatumEndetag' => set_value('DatumEndetag'),
+	    'DatumEndemonat' => set_value('DatumEndemonat'),
+	    'DatumEndejahr' => set_value('DatumEndejahr'),
+	    'MaxTeilnehmer' => set_value('MaxTeilnehmer'),
+	    'Leistung' => set_value('Leistung'),
+	    'TeilnehmerBeitrag' => set_value('TeilnehmerBeitrag'),
+	    'Besonderheiten' => set_value('Besonderheiten'),
+		);
+}	
+
 	
 	$veranstaltungform = array(
 			'Name'=>array(
@@ -40,17 +88,17 @@ $this->load->helper('MY_user_helper');
 			),
 			'ArtMassnahme' => array(
 				'htmltype' => 'dropdown',
-				'name' => 'Name:',
+				'name' => 'Art Massnahme:',
 				'html' => array(
-					'name' => 'Art der Massnahme:',
+					'name' => 'ArtMassnahme',
 					'id' => 'ArtMassnahme',
 				),
 				'values' => array(
-					'1' => 'Kurs',
-					'2' => 'Internationale Begegnung',
-					'3' => 'Ferienmassnahme',
+					'Kurs' => 'Kurs',
+					'Internationale Begegnung' => 'Internationale Begegnung',
+					'Ferienmassnahme' => 'Ferienmassnahme',
 				),
-				'selected' => '1',
+				'selected' => $vdata['ArtMassnahme'],
 			),
 			'Strasse' => array(
 				'htmltype' => 'text',
