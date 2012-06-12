@@ -1,12 +1,5 @@
-<html>
-<head>
-<title>My Form</title>
-</head>
-<body>
+<?php
 
-<h3>Your form was successfully submitted!</h3>
-
-<p><?php 
 
 if ( ! isset($_POST['Formular']))
  {
@@ -21,8 +14,16 @@ echo "<pre>";
 print_r($_POST);
 echo "</pre>";
 
-echo anchor('form', 'Try it again!'); ?></p>
+ergolgreich($_POST['Name'],'main/formularVeranstaltung');
 
-</body>
-</html>
+?>
 
+<?php
+function ergolgreich($name, $weiterleitung)
+{
+	
+echo "<h3>Daten der Veranstaltung <b>".$name."</b> erfoglgreich eingetragen!</h3>";
+echo anchor($weiterleitung, 'Neue Veranstaltung eintragen.');
+
+}
+?>

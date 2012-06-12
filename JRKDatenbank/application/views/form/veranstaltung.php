@@ -5,19 +5,25 @@
 $this->load->helper('form');
 $this->load->helper('MY_user_helper');
 	
+	$vdata['Name'] = set_value('Name');
+	
+	
 	$veranstaltungform = array(
 			'Name'=>array(
 				'htmltype' => 'text',
+				'name' => 'Name:',
 				'html' => array(
-					'name' => 'Name:',			//Name von oben
+					'name' => 'Name',			//Name von oben
 					'id' => 'Name',				//Wie Name	
 					'maxlength' => '100',		//Zeichenanzahl
+					'value' => $vdata['Name'],
 				)
 			),
 			'Traeger'=>array(
 				'htmltype' => 'text',
+				'name' => 'Traeger:',
 				'html' => array(
-					'name' => 'Traeger:',			//Name von oben
+					'name' => 'Traeger',			//Name von oben
 					'id' => 'Traeger',				//Wie Name	
 					'maxlength' => '100',		//Zeichenanzahl
 					'value' => 'Senat',
@@ -25,14 +31,16 @@ $this->load->helper('MY_user_helper');
 			),
 			'Thema'=>array(
 				'htmltype' => 'text',
+				'name' => 'Thema:',
 				'html' => array(
-					'name' => 'Thema:',			//Name von oben
+					'name' => 'Thema',			//Name von oben
 					'id' => 'Thema',				//Wie Name	
 					'maxlength' => '100',		//Zeichenanzahl
 				)
 			),
 			'ArtMassnahme' => array(
 				'htmltype' => 'dropdown',
+				'name' => 'Name:',
 				'html' => array(
 					'name' => 'Art der Massnahme:',
 					'id' => 'ArtMassnahme',
@@ -46,32 +54,36 @@ $this->load->helper('MY_user_helper');
 			),
 			'Strasse' => array(
 				'htmltype' => 'text',
+				'name' => 'Stasse:',
 				'html' => array(
-					'name' => 'Strasse:',
+					'name' => 'Strasse',
 					'id' => 'Strasse',
 					'maxlength' => '100',
 				)
 			),
 			'HausNr' => array(
 				'htmltype' => 'text',
+				'name' => 'Hausnummer:',
 				'html' => array(
-					'name' => 'Hausnummer:',
+					'name' => 'HausNr',
 					'id' => 'HausNr',
 					'maxlength' => '100',
 				)
 			),
 			'Plz' => array(
 				'htmltype' => 'text',
+				'name' => 'PLZ:',
 				'html' => array(
-					'name' => 'PLZ:',
+					'name' => 'PLZ',
 					'id' => 'Plz',
 					'maxlength' => '100',
 				)
 			),
 			'Ort' => array(
 				'htmltype' => 'text',
+				'name' => 'Ort:',
 				'html' => array(
-					'name' => 'Ort:',
+					'name' => 'Ort',
 					'id' => 'Ort',
 					'maxlength' => '100',
 				)
@@ -79,8 +91,9 @@ $this->load->helper('MY_user_helper');
 			'DatumBegin' => array(
 				'htmltype' => 'function',
 				'funcname' => 'DayValue',
+				'name' => 'DatumBegin:',
 				'html' => array(
-					'name' => 'DatumBegin:',	//Anzeige Beschreibungsname 
+					'name' => 'DatumBegin',	//Anzeige Beschreibungsname 
 					'id' => 'DatumBegin',		//wie name nur kleingeschrieben
 				),
 				'parameter' =>array(
@@ -93,8 +106,9 @@ $this->load->helper('MY_user_helper');
 			'DatumEnde' => array(
 				'htmltype' => 'function',
 				'funcname' => 'DayValue',
+				'name' => 'DatumEnde:',
 				'html' => array(
-					'name' => 'DatumEnde:',		//Anzeige Beschreibungsname 
+					'name' => 'DatumEnde',		//Anzeige Beschreibungsname 
 					'id' => 'DatumEnde',		//wie name nur kleingeschrieben
 				),
 				'parameter' =>array(
@@ -104,34 +118,38 @@ $this->load->helper('MY_user_helper');
 					'jahr' => '2000',			//voreingestellter jahr
 				),
 			),
-						'MaxTeilnehmer' => array(
+			'MaxTeilnehmer' => array(
 				'htmltype' => 'text',
+				'name' => 'Maximale Teilnehmer:',
 				'html' => array(
-					'name' => 'Maximale Teilnehmer:',
+					'name' => 'MaxTeilnehmer',
 					'id' => 'MaxTeilnehmer',
 					'maxlength' => '100',
 				),
 			),
 			'Leistung' => array(
 				'htmltype' => 'text',
+				'name' => 'Leistung:',
 				'html' => array(
-					'name' => 'Leistung:',
+					'name' => 'Leistung',
 					'id' => 'Leistung',
 					'maxlength' => '1000',
 				),
 			),
 			'TeilnehmerBeitrag' => array(
 				'htmltype' => 'text',
+				'name' => 'Teilnehmer Beitrag:',
 				'html' => array(
-					'name' => 'Teilnehmer Beitrag:',
+					'name' => 'TeilnehmerBeitrag',
 					'id' => 'TeilnehmerBeitrag',
 					'maxlength' => '10',
 				),
 			),
 			'Besonderheiten' => array(
 				'htmltype' => 'textarea',
+				'name' => 'Besonderheiten:',
 				'html' => array(
-					'name' => 'Besonderheiten:',
+					'name' => 'Besonderheiten',
 					'id' => 'Besonderheiten',
 					'maxlength' => '1000', 		//Zeichenanzahl
 					'rows' => '8', 			// Zeilen
@@ -159,10 +177,18 @@ function chkFormular () {
 </script>
 
 <?php
+
+echo "<pre>";
+print_r($_POST);
+echo "</pre>";
+echo $VeranstaltungID;
+echo validation_errors();
  
 $attributs = array('name' => 'Formular', 'onsubmit' => 'return chkFormular()');
 
-echo form_open('main/datenErfolg',$attributs);
+//echo form_open('main/datenErfolg',$attributs);
+//echo form_open('main/formularVeranstaltung');
+echo form_open();
 ?>
 
 <!-- <form method="post" action="<?php echo ""; ?>"> -->
@@ -175,7 +201,7 @@ foreach ($veranstaltungform as $element) {
 
 	  	echo '<div class="input">';
 		echo "\n\t\t\t\t";
-		echo form_label($element['html']['name'],$element['html']['id']);
+		echo form_label($element['name'],$element['html']['id']);
 		echo "\n\t\t\t\t";
 
 	switch ($element['htmltype']) {	  

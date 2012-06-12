@@ -59,17 +59,52 @@ class main extends CI_Controller {
 		}	
 	}
 	
-	function formularVeranstaltung()
+	function formularVeranstaltung($parameter)
 	{
-		$this->load->helper(array('url'));
+		$data['VeranstaltungID'] = $parameter;
 
+		$this->load->helper(array('form', 'url'));
+		$this->load->helper('MY_user_helper');
+		$this->load->library('form_validation');
 		
+		$_POST = array(
+			'Name' => 'rENE	',
+		    'Traeger' => 'Senat',
+		    'Thema' => '',
+		    'ArtMassnahme' => '1',
+		    'Strasse' => '',
+		    'HausNr' => '',
+		    'PLZ' => '',
+		    'Ort' => '',
+		    'DatumBegintag' => '1',
+		    'DatumBeginmonat' => '1',
+		    'DatumBeginjahr' => '2000',
+		    'DatumEndetag' => '1',
+		    'DatumEndemonat' => '1',
+		    'DatumEndejahr' => '2000',
+		    'MaxTeilnehmer' => '',
+		    'Leistung' => '',
+		    'TeilnehmerBeitrag' => '',
+		    'Besonderheiten' => '',
+		    'speichern' => '',
+		);
+		
+		$this->form_validation->set_rules('Name', 'Name', 'required');
+		$this->form_validation->set_rules('Traeger', 'Traeger', 'required');
+		$this->form_validation->set_rules('Thema', 'Thema', 'required');
 
-		//load the content variables
- 		$this->layout_data['content'] = $this->load->view('form/veranstaltung', NULL, true); //Welches Content File geladen werden soll 
-		$this->load->view('main', $this->layout_data);
-
-
+		if ($this->form_validation->run() == FALSE)
+		{
+			//load the content variables
+	 		$this->layout_data['content'] = $this->load->view('form/veranstaltung', $data, true); //Welches Content File geladen werden soll 
+			$this->load->view('main', $this->layout_data);
+		}
+		else
+		{
+			//load the content variables
+ 			$this->layout_data['content'] = $this->load->view('form/erfolg', NULL, true); //Welches Content File geladen werden soll 
+			$this->load->view('main', $this->layout_data);
+		}
 	}
 	
 	function datenErfolg()
@@ -80,7 +115,9 @@ class main extends CI_Controller {
 	} 
 	
 	function formularKreisverband()
-	{
+	{//load the content variables
+		$this->layout_data['content'] = $this->load->view('form/veranstaltung', $data, true); //Welches Content File geladen werden soll 
+			
 		$this->load->helper(array('form', 'url'));
 		$this->load->helper('MY_user_helper');
 		

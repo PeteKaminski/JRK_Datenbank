@@ -4,6 +4,7 @@
  */
 function DayValue($parameters)
 {
+	// TODO: umbedingt nochmal Ändern 
 	$parameter=$parameters['parameter'];
 	//für Tag
 	echo "\n<select name=\"".$parameter['name']."tag\">\n";
