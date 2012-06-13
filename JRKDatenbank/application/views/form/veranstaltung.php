@@ -5,34 +5,62 @@
 $this->load->helper('form');
 $this->load->helper('MY_user_helper');
 	
-if ($VeranstaltungID != 'new')
+
+if (!isset($_POST['Speichern']))
 {
-	echo 'ID nicht vorhanden.';
+	if($VeranstaltungID != 'new')
+	{
+	echo 'Lade daten aus der Datenbank';
 	
-/*	$vdata = array(
-		'Name' => set_value('Name'),
-	    'Traeger' => set_value('Traeger'),
-	    'Thema' => set_value('Thema'),
-	    'ArtMassnahme' => set_value('ArtMassnahme'),
-	    'Strasse' => set_value('Strasse'),
-	    'HausNr' => set_value('HausNr'),
-	    'PLZ' => set_value('PLZ'),
-	    'Ort' => set_value('Ort'),
-	    'DatumBegintag' => set_value('DatumBegintag'),
-	    'DatumBeginmonat' => set_value('DatumBeginmonat'),
-	    'DatumBeginjahr' => set_value('DatumBeginjahr'),
-	    'DatumEndetag' => set_value('DatumEndetag'),
-	    'DatumEndemonat' => set_value('DatumEndemonat'),
-	    'DatumEndejahr' => set_value('DatumEndejahr'),
-	    'MaxTeilnehmer' => set_value('MaxTeilnehmer'),
-	    'Leistung' => set_value('Leistung'),
-	    'TeilnehmerBeitrag' => set_value('TeilnehmerBeitrag'),
-	    'Besonderheiten' => set_value('Besonderheiten'),
+	$vdata = array(
+		'Name' => 'Name',
+	    'Traeger' => 'Traeger',
+	    // 'Thema' => set_value('Thema'),
+	    // 'ArtMassnahme' => '',
+	    // 'Strasse' => set_value('Strasse'),
+	    // 'HausNr' => set_value('HausNr'),
+	    // 'PLZ' => set_value('PLZ'),
+	    // 'Ort' => set_value('Ort'),
+	    // 'DatumBegintag' => set_value('DatumBegintag'),
+	    // 'DatumBeginmonat' => set_value('DatumBeginmonat'),
+	    // 'DatumBeginjahr' => set_value('DatumBeginjahr'),
+	    // 'DatumEndetag' => set_value('DatumEndetag'),
+	    // 'DatumEndemonat' => set_value('DatumEndemonat'),
+	    // 'DatumEndejahr' => set_value('DatumEndejahr'),
+	    // 'MaxTeilnehmer' => set_value('MaxTeilnehmer'),
+	    // 'Leistung' => set_value('Leistung'),
+	    // 'TeilnehmerBeitrag' => set_value('TeilnehmerBeitrag'),
+	    // 'Besonderheiten' => set_value('Besonderheiten'),
 	    );
- */
+	}
+		else
+	{
+		echo 'Default Value gesetzt';
+		$vdata = array(
+		'Name' => 'Name',
+	    'Traeger' => 'Senat',
+	    'Thema' => '',
+	    'ArtMassnahme' => '',
+	    'Strasse' => '',
+	    'HausNr' => '',
+	    'Plz' => '',
+	    'Ort' => '',
+	    'DatumBegintag' => '',
+	    'DatumBeginmonat' => '',
+	    'DatumBeginjahr' => '',
+	    'DatumEndetag' => '',
+	    'DatumEndemonat' => '',
+	    'DatumEndejahr' => '',
+	    'MaxTeilnehmer' => '',
+	    'Leistung' => '',
+	    'TeilnehmerBeitrag' => '',
+	    'Besonderheiten' => '',
+	    );
+	}
 }
 else 
 {
+	echo 'Setze setValue variablen.';
 	$vdata = array(
 		'Name' => set_value('Name'),
 	    'Traeger' => set_value('Traeger'),
@@ -40,7 +68,7 @@ else
 	    'ArtMassnahme' => set_value('ArtMassnahme'),
 	    'Strasse' => set_value('Strasse'),
 	    'HausNr' => set_value('HausNr'),
-	    'PLZ' => set_value('PLZ'),
+	    'Plz' => set_value('Plz'),
 	    'Ort' => set_value('Ort'),
 	    'DatumBegintag' => set_value('DatumBegintag'),
 	    'DatumBeginmonat' => set_value('DatumBeginmonat'),
@@ -52,9 +80,8 @@ else
 	    'Leistung' => set_value('Leistung'),
 	    'TeilnehmerBeitrag' => set_value('TeilnehmerBeitrag'),
 	    'Besonderheiten' => set_value('Besonderheiten'),
-		);
+		);	
 }	
-
 	
 	$veranstaltungform = array(
 			'Name'=>array(
@@ -74,7 +101,7 @@ else
 					'name' => 'Traeger',			//Name von oben
 					'id' => 'Traeger',				//Wie Name	
 					'maxlength' => '100',		//Zeichenanzahl
-					'value' => 'Senat',
+					'value' => $vdata['Traeger'],
 				)
 			),
 			'Thema'=>array(
@@ -84,6 +111,7 @@ else
 					'name' => 'Thema',			//Name von oben
 					'id' => 'Thema',				//Wie Name	
 					'maxlength' => '100',		//Zeichenanzahl
+					'value' => $vdata['Thema'],
 				)
 			),
 			'ArtMassnahme' => array(
@@ -107,6 +135,7 @@ else
 					'name' => 'Strasse',
 					'id' => 'Strasse',
 					'maxlength' => '100',
+					'value' => $vdata['Strasse'],
 				)
 			),
 			'HausNr' => array(
@@ -116,15 +145,17 @@ else
 					'name' => 'HausNr',
 					'id' => 'HausNr',
 					'maxlength' => '100',
+					'value' => $vdata['HausNr'],
 				)
 			),
 			'Plz' => array(
 				'htmltype' => 'text',
 				'name' => 'PLZ:',
 				'html' => array(
-					'name' => 'PLZ',
+					'name' => 'Plz',
 					'id' => 'Plz',
 					'maxlength' => '100',
+					'value' => $vdata['Plz'],
 				)
 			),
 			'Ort' => array(
@@ -134,6 +165,7 @@ else
 					'name' => 'Ort',
 					'id' => 'Ort',
 					'maxlength' => '100',
+					'value' => $vdata['Ort'],
 				)
 			),
 			'DatumBegin' => array(
@@ -146,9 +178,9 @@ else
 				),
 				'parameter' =>array(
 					'name' => 'DatumBegin',		//Wie Oben
-					'tag' => '1',				//voreingestellter Tag
-					'monat' => '1',				//voreingestellter monat
-					'jahr' => '2000',			//voreingestellter jahr
+					'tag' => $vdata['DatumBegintag'],				//voreingestellter Tag
+					'monat' => $vdata['DatumBeginmonat'],				//voreingestellter monat
+					'jahr' => $vdata['DatumBeginjahr'],			//voreingestellter jahr
 				),
 			),
 			'DatumEnde' => array(
@@ -158,12 +190,13 @@ else
 				'html' => array(
 					'name' => 'DatumEnde',		//Anzeige Beschreibungsname 
 					'id' => 'DatumEnde',		//wie name nur kleingeschrieben
+					
 				),
 				'parameter' =>array(
 					'name' => 'DatumEnde',		//Wie Oben
-					'tag' => '1',				//voreingestellter Tag
-					'monat' => '1',				//voreingestellter monat
-					'jahr' => '2000',			//voreingestellter jahr
+					'tag' => $vdata['DatumEndetag'],				//voreingestellter Tag
+					'monat' => $vdata['DatumEndemonat'],				//voreingestellter monat
+					'jahr' => $vdata['DatumEndejahr'],			//voreingestellter jahr
 				),
 			),
 			'MaxTeilnehmer' => array(
@@ -173,6 +206,7 @@ else
 					'name' => 'MaxTeilnehmer',
 					'id' => 'MaxTeilnehmer',
 					'maxlength' => '100',
+					'value' => $vdata['MaxTeilnehmer'],
 				),
 			),
 			'Leistung' => array(
@@ -182,6 +216,7 @@ else
 					'name' => 'Leistung',
 					'id' => 'Leistung',
 					'maxlength' => '1000',
+					'value' => $vdata['Leistung'],
 				),
 			),
 			'TeilnehmerBeitrag' => array(
@@ -191,6 +226,7 @@ else
 					'name' => 'TeilnehmerBeitrag',
 					'id' => 'TeilnehmerBeitrag',
 					'maxlength' => '10',
+					'value' => $vdata['Besonderheiten'],
 				),
 			),
 			'Besonderheiten' => array(
@@ -201,7 +237,8 @@ else
 					'id' => 'Besonderheiten',
 					'maxlength' => '1000', 		//Zeichenanzahl
 					'rows' => '8', 			// Zeilen
-					'cols' => '50'  			// Spalten
+					'cols' => '50', 			// Spalten
+					'value' => $vdata['Besonderheiten'],
 				),
 			),
 
@@ -282,7 +319,7 @@ echo form_fieldset_close(); ?>
 
 </div>
 	<p>
-		<?php echo form_submit('speichern','Speichern'); ?>
+		<?php echo form_submit('Speichern','Speichern'); ?>
 	</p>
 </form>
 		
