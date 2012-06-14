@@ -6,12 +6,20 @@ class main extends CI_Controller {
 	
 	function __construct()
 	{
-		
 		parent::__construct();
+		$this->load->helper('date');
+		$this->load->library('encrypt');
+		$this->load->library('session');
+		
 		//$this->layout_data = $this->viewHeadandNavi();
 		$this->layout_data['pageTitle'] = "JRK - Mitgliederverwaldung";
 		$this->layout_data['header'] = $this->load->view('header',NULL,true);	//Welches Header File geladen werden soll
 		$this->layout_data['navigation'] = $this->load->view('navigation',NULL,true); //Welches Navi File geladen werden soll
+	}
+	
+	function isSessionValid(){
+		if ((now() - $this->session->userdata('last_activity')) > 60*60)return true;
+		return false;
 	}
 	
 	
