@@ -1,7 +1,8 @@
 <?php
 
 //$data = $this->User_model->deleteUser(2);
-$data  = $this->login_model->check_user('dennis','asd');
+//$this->Dbuser_model->addUser('dennis','asd',1);
+$data  = $this->Dbuser_model->changePW('dennis', 'asd', 'dsa'); 
 
 if (isset($data)) {
 

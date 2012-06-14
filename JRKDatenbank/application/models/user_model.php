@@ -277,7 +277,7 @@ class User_model extends CI_Model {
 
 		$this -> deleteDependentData($userID);
 
-		$query = "DELETE * FROM User WHERE UserID = $userID";
+		$query = "DELETE FROM User WHERE UserID = $userID";
 
 		//$DBAnswer = $this->db->query($query);
 
