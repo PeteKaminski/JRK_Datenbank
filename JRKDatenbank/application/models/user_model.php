@@ -466,24 +466,24 @@ class User_model extends CI_Model {
 		 * Nun muss der User aus allen restlichen Tabellen (Telefon:, Email, UserKreisverband, UserQualifikation, UserInteressen, UserPosition)
 		 * gelöscht werden!
 		 */
-		 /*
-		$tables = array('Telefon', 'Email', 'UserKreisverband', 'UserQualifikation', 'UserInteressen', 'UserPosition');
-		foreach ($tables as $value) {
-			unset($DBAnswer);
-			$query = "SELECT COUNT(UserID) FROM $value WHERE UserID=$userID;";
-			$DBAnswer = $this -> db -> query($query);
-			//echo "<p>SQL Query [deleteDependentData]: ".$query.'</p>';
-			if (isset($DBAnswer)) {
-				//$DBAnswer = $DBAnswer->result();
-				$row = $DBAnswer -> row_array();
-				echo "<p><b>SQL Antwort  [deleteDependentData]: gefunde Abh&auml;nigkeitenvon $value: " . $row['COUNT(UserID)'] . '</b></p>';
-			} else {
-				echo "<p><b>SQL Antwort  [deleteDependentData]: gefunde Abh&auml;nigkeiten von $value: 0</b></p>";
-			}
+		/*
+		 $tables = array('Telefon', 'Email', 'UserKreisverband', 'UserQualifikation', 'UserInteressen', 'UserPosition');
+		 foreach ($tables as $value) {
+		 unset($DBAnswer);
+		 $query = "SELECT COUNT(UserID) FROM $value WHERE UserID=$userID;";
+		 $DBAnswer = $this -> db -> query($query);
+		 //echo "<p>SQL Query [deleteDependentData]: ".$query.'</p>';
+		 if (isset($DBAnswer)) {
+		 //$DBAnswer = $DBAnswer->result();
+		 $row = $DBAnswer -> row_array();
+		 echo "<p><b>SQL Antwort  [deleteDependentData]: gefunde Abh&auml;nigkeitenvon $value: " . $row['COUNT(UserID)'] . '</b></p>';
+		 } else {
+		 echo "<p><b>SQL Antwort  [deleteDependentData]: gefunde Abh&auml;nigkeiten von $value: 0</b></p>";
+		 }
 
-		}
-		*/
-		
+		 }
+		 */
+
 		//$query = 'DELETE Telefon, Email, UserKreisverband, UserVeranstaltung, UserQualifikation, UserInteressen, UserPosition WHERE UserID='.$userID;
 		//$DBAnswer = $this->db->query($query);
 

@@ -28,6 +28,7 @@ class main extends CI_Controller {
 	function testdb()
 	{
 		$this->load->model('User_model');
+		$this->load->model('login_model');
 		$this->layout_data['content'] = $this->load->view('test_db', NULL, true); //Welches Content File geladen werden soll 
 		$this->load->view('main', $this->layout_data);
 	}
