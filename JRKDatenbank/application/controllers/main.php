@@ -67,29 +67,29 @@ class main extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 		$this->load->helper('MY_user_helper');
 		$this->load->library('form_validation');
+		
 		$this->load->model('vera_model');
-		if (isset($this->input->post('Speichern')))
-		{			
-			$this->form_validation->set_message('required', 'Das Feld %s ist erforderlich.');
-			$this->form_validation->set_rules('Name', 'Name', 'required');
-		    $this->form_validation->set_rules('Traeger', 'Traeger', 'required');
-		    $this->form_validation->set_rules('Thema', 'Thema', 'required');
-		    $this->form_validation->set_rules('ArtMassnahme', 'ArtMassnahme', 'required');
-		    $this->form_validation->set_rules('Strasse', 'Strasse', 'required');
-		    $this->form_validation->set_rules('HausNr', 'HausNr', 'required');
-		    $this->form_validation->set_rules('Plz', 'Plz', 'required');
-		    $this->form_validation->set_rules('Ort', 'Ort', 'required');
-		    $this->form_validation->set_rules('DatumBegintag', 'DatumBegintag', 'required');
-		    $this->form_validation->set_rules('DatumBeginmonat', 'DatumBeginmonat', 'required');
-		    $this->form_validation->set_rules('DatumBeginjahr', 'DatumBeginjahr', 'required');
-		    $this->form_validation->set_rules('DatumEndetag', 'DatumEndetag', 'required');
-		    $this->form_validation->set_rules('DatumEndemonat', 'DatumEndemonat', 'required');
-		    $this->form_validation->set_rules('DatumEndejahr', 'DatumEndejahr', 'required');
-		    $this->form_validation->set_rules('MaxTeilnehmer', 'MaxTeilnehmer', 'required');
-		    $this->form_validation->set_rules('Leistung', 'Leistung');
-		    $this->form_validation->set_rules('TeilnehmerBeitrag', 'TeilnehmerBeitrag', 'required');
-		    $this->form_validation->set_rules('Besonderheiten', 'Besonderheiten');
-	    }
+					
+		$this->form_validation->set_message('required', 'Das Feld %s ist erforderlich.');
+		$this->form_validation->set_rules('Name', 'Name', 'required');
+	    $this->form_validation->set_rules('Traeger', 'Traeger', 'required');
+	    $this->form_validation->set_rules('Thema', 'Thema', 'required');
+	    $this->form_validation->set_rules('ArtMassnahme', 'ArtMassnahme', 'required');
+	    $this->form_validation->set_rules('Strasse', 'Strasse', 'required');
+	    $this->form_validation->set_rules('HausNr', 'HausNr', 'required');
+	    $this->form_validation->set_rules('Plz', 'Plz', 'required');
+	    $this->form_validation->set_rules('Ort', 'Ort', 'required');
+	    $this->form_validation->set_rules('DatumBegintag', 'DatumBegintag', 'required');
+	    $this->form_validation->set_rules('DatumBeginmonat', 'DatumBeginmonat', 'required');
+	    $this->form_validation->set_rules('DatumBeginjahr', 'DatumBeginjahr', 'required');
+	    $this->form_validation->set_rules('DatumEndetag', 'DatumEndetag', 'required');
+	    $this->form_validation->set_rules('DatumEndemonat', 'DatumEndemonat', 'required');
+	    $this->form_validation->set_rules('DatumEndejahr', 'DatumEndejahr', 'required');
+	    $this->form_validation->set_rules('MaxTeilnehmer', 'MaxTeilnehmer', 'required');
+	    $this->form_validation->set_rules('Leistung', 'Leistung');
+	    $this->form_validation->set_rules('TeilnehmerBeitrag', 'TeilnehmerBeitrag', 'required');
+	    $this->form_validation->set_rules('Besonderheiten', 'Besonderheiten');
+	    
 		if ($this->form_validation->run() == FALSE)
 		{
 			//load the content variables
