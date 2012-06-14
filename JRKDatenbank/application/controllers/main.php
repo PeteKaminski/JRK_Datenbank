@@ -6,12 +6,20 @@ class main extends CI_Controller {
 	
 	function __construct()
 	{
-		
 		parent::__construct();
+		$this->load->helper('date');
+		$this->load->library('encrypt');
+		$this->load->library('session');
+		
 		//$this->layout_data = $this->viewHeadandNavi();
 		$this->layout_data['pageTitle'] = "JRK - Mitgliederverwaldung";
 		$this->layout_data['header'] = $this->load->view('header',NULL,true);	//Welches Header File geladen werden soll
 		$this->layout_data['navigation'] = $this->load->view('navigation',NULL,true); //Welches Navi File geladen werden soll
+	}
+	
+	function isSessionValid(){
+		if ((now() - $this->session->userdata('last_activity')) > 60*60)return true;
+		return false;
 	}
 	
 	
@@ -67,7 +75,10 @@ class main extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 		$this->load->helper('MY_user_helper');
 		$this->load->library('form_validation');
-
+		
+		$this->load->model('vera_model');
+					
+		$this->form_validation->set_message('required', 'Das Feld %s ist erforderlich.');
 		$this->form_validation->set_rules('Name', 'Name', 'required');
 	    $this->form_validation->set_rules('Traeger', 'Traeger', 'required');
 	    $this->form_validation->set_rules('Thema', 'Thema', 'required');
@@ -86,7 +97,7 @@ class main extends CI_Controller {
 	    $this->form_validation->set_rules('Leistung', 'Leistung');
 	    $this->form_validation->set_rules('TeilnehmerBeitrag', 'TeilnehmerBeitrag', 'required');
 	    $this->form_validation->set_rules('Besonderheiten', 'Besonderheiten');
-
+	    
 		if ($this->form_validation->run() == FALSE)
 		{
 			//load the content variables
