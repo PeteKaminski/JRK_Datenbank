@@ -67,8 +67,8 @@ class main extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 		$this->load->helper('MY_user_helper');
 		$this->load->library('form_validation');
-		$this->load->model('vera_model');
 		
+		$this->load->model('vera_model');
 					
 		$this->form_validation->set_message('required', 'Das Feld %s ist erforderlich.');
 		$this->form_validation->set_rules('Name', 'Name', 'required');
