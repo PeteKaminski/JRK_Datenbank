@@ -1,6 +1,3 @@
-
-
-
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
@@ -114,4 +111,3 @@ class CI_Controller {
 
 /* End of file Controller.php */
 /* Location: ./system/core/Controller.php */
-
