@@ -8,7 +8,8 @@ class User_model extends CI_Model {
 	 */
 
 	public function __construct() {
-		$this -> load -> database();
+	    //load the CI instance     
+		$this->load->database();
 	}
 
 	public function get_user($userID = FALSE) {

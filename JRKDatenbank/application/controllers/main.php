@@ -12,7 +12,7 @@ class main extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('date');
 		$this->load->library('encrypt');
-		$this->load->library('session');
+		$this->load->library('session');      
 	}
 	
 	private function isSessionValid(){
