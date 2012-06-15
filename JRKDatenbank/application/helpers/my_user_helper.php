@@ -4,96 +4,107 @@
  */
 function DayValue($parameters)
 {
+	$txt = "";
 	// TODO: umbedingt nochmal Ändern 
 	$parameter=$parameters['parameter'];
 	//für Tag
-	echo "\n<select name=\"".$parameter['name']."tag\">\n";
+	$txt .=  "\n<select name=\"".$parameter['name']."tag\">\n";
 	for($i=1;$i<=31;$i++) {
-		echo "\t<option value=\"". $i ."\""; 
+		$txt .=  "\t<option value=\"". $i ."\""; 
 		if ($parameter['tag'] == $i )
-		 	echo ' selected="selected" ';
-		echo ">". $i ."</option>\n"; 
+		 	$txt .=  ' selected="selected" ';
+		$txt .=  ">". $i ."</option>\n"; 
 	}
-	echo "</select>\n";
+	$txt .=  "</select>\n";
 	
 	//für Monat
-	echo "\n<select name=\"".$parameter['name']."monat\">\n";
+	$txt .=  "\n<select name=\"".$parameter['name']."monat\">\n";
 	for($i=1;$i<=12;$i++) {
-		echo "\t<option value=\"". $i ."\""; 
+		$txt .=  "\t<option value=\"". $i ."\""; 
 		if ($parameter['monat'] == $i )
-		 	echo ' selected="selected" ';
-		echo ">". $i ."</option>\n"; 
+		 	$txt .=  ' selected="selected" ';
+		$txt .=  ">". $i ."</option>\n"; 
 	}
-	echo "</select>\n";
+	$txt .=  "</select>\n";
 	
 	//für Jahr
-	echo "\n<select name=\"".$parameter['name']."jahr\">\n";
+	$txt .=  "\n<select name=\"".$parameter['name']."jahr\">\n";
 	for($i=1920;$i<=2020;$i++) {
-		echo "\t<option value=\"". $i ."\""; 
+		$txt .=  "\t<option value=\"". $i ."\""; 
 		if ($parameter['jahr'] == $i )
-		 	echo ' selected="selected" ';
-		echo ">". $i ."</option>\n"; 
+		 	$txt .=  ' selected="selected" ';
+		$txt .=  ">". $i ."</option>\n"; 
 	}
-	echo "</select>\n";
+	$txt .=  "</select>\n";
+	return $txt;
 }
 
 function GeschlechtValue($parameters)
 {
+	$txt = "";
 	$parameter=$parameters['parameter'];
 	foreach ($parameter['optionen'] as $element ) {
-		echo '<input type="radio" name="'.$parameter['id'].'" value="'.$element.'"'; 
+		$txt .=  '<input type="radio" name="'.$parameter['id'].'" value="'.$element.'"'; 
 		if ($parameter['checked'] == $element)
-		echo ' checked="checked" ';
-		echo '>'.$element;
+		$txt .=  ' checked="checked" ';
+		$txt .=  '>'.$element;
 	}	
+	return $txt;
 }
 
 function TelefonEmailValue($parameter)
 {
-	echo form_dropdown($parameter['html']['id'],$parameter['type'],$parameter['selected']);
-	echo " ";
-	echo form_input($parameter['html']);
+	$txt = "";
+	$txt .= form_dropdown($parameter['html']['id'],$parameter['type'],$parameter['selected']);
+	$txt .=  " ";
+	$txt .=  form_input($parameter['html']);
+	return $txt;
 }
 
 function printPosition ($element)
 {
+	$txt = "";
 	$positionArr = $element['parameter']['positionArr'];
 	$selected  = $element['parameter']['selected'];
 	$von['parameter'] = $element['parameter']['von'];
 	$bis['parameter'] = $element['parameter']['bis'];
 	
-	echo form_dropdown($element['html']['id'],$positionArr,$selected);
-	echo " von ";
+	$txt .=  form_dropdown($element['html']['id'],$positionArr,$selected);
+	$txt .=  " von ";
 	DayValue($von);
-	echo " bis ";
+	$txt .=  " bis ";
 	DayValue($bis);
+	return $txt;
 }
 
 function printQualli($parameter)
 {
+	$txt = "";
 	$selectedQualli = $parameter['selected'];
 	$quallifikationen = $parameter['quallifikationsArr'];
 	foreach($selectedQualli as $key => $element)
 	{
-		echo "\n<select name=\"".$parameter['html']['id'].$key."\">\n";
+		$txt .=  "\n<select name=\"".$parameter['html']['id'].$key."\">\n";
 		foreach($quallifikationen as $keyq => $qualli) {
-			echo "\t<option value=\"". $qualli ."\""; 
+			$txt .=  "\t<option value=\"". $qualli ."\""; 
 			if ($element == $keyq) //wenn der index des qualliarrays gleich dem aktuellem selected element ist.
-			 	echo ' selected="selected" ';
-			echo ">". $qualli ."</option>\n";
+			 	$txt .=  ' selected="selected" ';
+			$txt .=  ">". $qualli ."</option>\n";
 		}
-		echo "</select></br>\n"; 
+		$txt .=  "</select></br>\n"; 
 	}
+	return $txt;
 }
 
 
 function printFuehZeug ($parameter)
 {
+	$txt = "";
 	$date['parameter'] = $parameter['date'];
-	echo form_checkbox($parameter['html']);
-	echo " vorgelegt am: ";
+	$txt .=  form_checkbox($parameter['html']);
+	$txt .=  " vorgelegt am: ";
 	DayValue($date);
-	
+	return $txt;
 }
 
 
