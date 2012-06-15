@@ -4,7 +4,7 @@
 //echo validation_errors(); 
 $this->load->helper('form');
 $this->load->helper('MY_user_helper');
-	
+$this->load->library('table');
 
 if (!isset($_POST['Speichern']))
 {
@@ -281,38 +281,46 @@ echo form_open();
 
 
 <?php echo form_fieldset('Veranstaltungs Daten'); 
-  
+
+$this->table->set_heading('', '');
 foreach ($veranstaltungform as $element) {
 
-	  	echo '<div class="input">';
-		echo "\n\t\t\t\t";
-		echo form_label($element['name'],$element['html']['id']);
-		echo "\n\t\t\t\t";
+	
+		$name = "";
+		$value = "";
+// 	  	echo '<div class="input">';
+// 		echo "\n\t\t\t\t";
+		$name = form_label($element['name'],$element['html']['id']);
+// 		echo "\n\t\t\t\t";
 
 	switch ($element['htmltype']) {	  
 	    case 'text':
-	        echo form_input($element['html']);
+	        $value =  form_input($element['html']);
 	        break;
 		case 'textarea':
-			echo form_textarea($element['html']);
+			$value =  form_textarea($element['html']);
 	        break;
 	    case 'function':
-	        $element['funcname']($element);
+	        $value =  $element['funcname']($element);
 	        break;
 		case 'checkbox':
 
-	        echo form_checkbox($element['html'],$element['html']['id'],$element['html']['checked']);
+	        $value =  form_checkbox($element['html'],$element['html']['id'],$element['html']['checked']);
 	        break;	
 		case 'dropdown':
 
-	        echo form_dropdown($element['html']['id'],$element['values'],$element['selected']);
+	        $value =  form_dropdown($element['html']['id'],$element['values'],$element['selected']);
 	        break;	
 	}
 	
-	echo "\n\t\t\t\t";
-	echo "</div>\n\t\t\t\t";	
-}
+	$this->table->add_row($name, $value);
+// 	echo "\n\t\t\t\t";
+// 	echo "</div>\n\t\t\t\t";	
+	
 
+}
+//Tabelle generieren lassen
+echo $this->table->generate();
 
 echo form_fieldset_close(); ?>
 
