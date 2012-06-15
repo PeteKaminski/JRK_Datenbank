@@ -176,6 +176,7 @@ class main extends CI_Controller {
 	{
 		$this->load->model('User_model');
 		$this->load->model('Dbuser_model');
+        $this->load->model('Vera_model');
 		$this->layout_data['content'] = $this->load->view('test_db', NULL, true); //Welches Content File geladen werden soll 
 		$this->load->view('main', $this->layout_data);
 	}
