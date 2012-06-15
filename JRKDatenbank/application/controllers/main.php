@@ -10,105 +10,105 @@ class main extends CI_Controller {
 		$this->load->helper('date');
 		$this->load->library('encrypt');
 		$this->load->library('session');
-		
-		//$this->layout_data = $this->viewHeadandNavi();
-		$this->layout_data['pageTitle'] = "JRK - Mitgliederverwaldung";
-		$this->layout_data['header'] = $this->load->view('header',NULL,true);	//Welches Header File geladen werden soll
-		$this->layout_data['navigation'] = $this->load->view('navigation',NULL,true); //Welches Navi File geladen werden soll
 	}
 	
 	private function isSessionValid(){
-		if ((now() - $this->session->userdata('last_activity')) <5 ) return 1;
+		if ((now() - $this->session->userdata('last_activity')) < 60 ) return 1;
 		return 0;
 	}
 	
+	
+	//Funktion, welche zur nächsten Seite wechselt
 	function changeWebsite($nextWebsite){
+		
+		//Anzeigen, die unabhängig vom Login angezeigt werden
+		$this->layout_data['pageTitle'] = "JRK - Mitgliederverwaldung";
+		$this->layout_data['header'] = $this->load->view('header',NULL,true);
+		
+		//Abfrage, ob Session gültig
 		if ($this->isSessionValid() == 1){
 			//Change Website
-				
+			$this->layout_data['navigation'] = $this->load->view('navigation',NULL,true);
+			
 			$this->session->set_userdata('last_activity', now());
 			
+			//Helper und Libraries laden
 			$this->load->helper(array('form', 'url'));
 			$this->load->helper('MY_user_helper');
 			$this->load->library('form_validation');
 			
-			$data['userform']=getuserformarray();
+			$userdaten['userform']=getuserformarray();
 
-			
+			$site = "";
 			switch ($nextWebsite){
 				case 'formular_user':
-					$this->formularUser_rules();
 					
-					$userdaten['userform']=getuserformarray();
-					
-					if ($this->form_validation->run() == FALSE)
-					{
-						//load the content variables
-						$this->layout_data['content'] = $this->load->view('form/user', $userdaten, true); //Welches Content File geladen werden soll
-						$this->load->view('main', $this->layout_data);
-					}
-					else
-					{
-						//load the content variables
-						$this->layout_data['content'] = $this->load->view('form/erfolg', NULL, true); //Welches Content File geladen werden soll
-						$this->load->view('main', $this->layout_data);
-					}
+					//Mitglieder Forumlar
+					//****************************************************
+					$site = "form/user";
+					$this->formularUser_ValidationRules();
 					break;
+					//****************************************************
+					
+					
 				case 'formular_veranstaltungen':
-					$data['VeranstaltungID'] = "new";
 					
+					//Veranstaltung Forumlar
+					//****************************************************
+					$site = "form/veranstaltung";
+					$userdaten['VeranstaltungID'] = "new";
 					$this->load->model('vera_model');
-						
 					$this->form_validation->set_message('required', 'Das Feld %s ist erforderlich.');
-					
-					$this->formularVeranstaltung_rules();
-					 
-					if ($this->form_validation->run() == FALSE)
-					{
-						//load the content variables
-						$this->layout_data['content'] = $this->load->view('form/veranstaltung', $data, true); //Welches Content File geladen werden soll
-						$this->load->view('main', $this->layout_data);
-					}
-					else
-					{
-						//load the content variables
-						$this->layout_data['content'] = $this->load->view('form/erfolg', NULL, true); //Welches Content File geladen werden soll
-						$this->load->view('main', $this->layout_data);
-					}
+					$this->formularVeranstaltung_ValidationRules();
 					break;
+					//****************************************************
+					
+					
 				case 'formular_kreisverband':
 					
-					$this->layout_data['content'] = $this->load->view('form/veranstaltung', $data, true); //Welches Content File geladen werden soll
-					// 		$data['userform']=getuserformarray();
-					if ($this->form_validation->run() == FALSE)
-					{
-						//load the content variables
-						$this->layout_data['content'] = $this->load->view('form/kreisverband', NULL, true); //Welches Content File geladen werden soll
-						$this->load->view('main', $this->layout_data);
-					}
-					else
-					{
-						//load the content variables
-						$this->layout_data['content'] = $this->load->view('form/erfolg', NULL, true); //Welches Content File geladen werden soll
-						$this->load->view('main', $this->layout_data);
-					}
+					//Kreisverband Forumlar
+					//****************************************************
+					$site = "form/kreisverband";
 					break;
+					//****************************************************
 					
-				case 'main':
+					
+				default:
+					
+					//Begrüßung Site
+					//****************************************************
+					$site = "overview";
 					$this->load->model('model');
-	
-					//load the content variables
-					$this->layout_data['content'] = $this->load->view('overview', NULL, true); //Welches Content File geladen werden soll
-					$this->load->view('main', $this->layout_data);
 					break;
+					//****************************************************
+					
 			}
+			
+			if ($this->form_validation->run() == FALSE){
+				//load the content variables
+				$this->layout_data['content'] = $this->load->view($site, $userdaten, true); 
+			}
+			else{
+				//load the content variables
+				$this->layout_data['content'] = $this->load->view('form/erfolg', NULL, true);
+			}
+			
+			//Aufruf der Seite
+			$this->load->view('main', $this->layout_data);
+			
 		}else{
+			//Session ungültig
+			//****************************************************
+			
+			//Überprüfung des Passwortes
 			if ($this->input->post('username_pw') == "test"){
 				$this->session->set_userdata('last_activity', now());
 				$this->changeWebsite($nextWebsite);
 				return;
 			}
+			
 			//Login
+			$this->layout_data['navigation'] = $this->load->view('clean',NULL,true);
 			$this->layout_data['content'] = $this->load->view('/form/login', NULL, true); //Welches Content File geladen werden soll
 			$this->load->view('main', $this->layout_data);
 		}
@@ -116,14 +116,14 @@ class main extends CI_Controller {
 	
 	function index()
 	{
-		$this->changeWebsite("main");
+		$this->changeWebsite("overview");
 	}
 
-	private function formularUser_rules(){
+	private function formularUser_ValidationRules(){
 		$this->form_validation->set_rules('Name', 'Name', 'required');
 		$this->form_validation->set_rules('Vorname', 'Vorname', 'required');
 	}
-	private function formularVeranstaltung_rules(){
+	private function formularVeranstaltung_ValidationRules(){
 		$this->form_validation->set_rules('Name', 'Name', 'required');
 		$this->form_validation->set_rules('Traeger', 'Traeger', 'required');
 		$this->form_validation->set_rules('Thema', 'Thema', 'required');
@@ -143,7 +143,7 @@ class main extends CI_Controller {
 		$this->form_validation->set_rules('TeilnehmerBeitrag', 'TeilnehmerBeitrag', 'required');
 		$this->form_validation->set_rules('Besonderheiten', 'Besonderheiten');
 	}
-	private function formularKreisverband_rules(){
+	private function formularKreisverband_ValidationRules(){
 	
 	}
 	
@@ -156,79 +156,12 @@ class main extends CI_Controller {
 	}
 	
 	
-	// Ruf das UserFormular zum anlegen von Mitgliedern oder zum Ã„ndern von Mitglieder Daten auf
-// 	private function formularUser()
-// 	{
-// 		$this->formularUser_rules();
-		
-// 		$userdaten['userform']=getuserformarray();
-		
-// 		if ($this->form_validation->run() == FALSE)
-// 		{
-// 			//load the content variables
-//  			$this->layout_data['content'] = $this->load->view('form/user', $userdaten, true); //Welches Content File geladen werden soll 
-// 			$this->load->view('main', $this->layout_data);
-// 		}
-// 		else
-// 		{
-// 			//load the content variables
-//  			$this->layout_data['content'] = $this->load->view('form/erfolg', NULL, true); //Welches Content File geladen werden soll 
-// 			$this->load->view('main', $this->layout_data);
-// 		}	
-// 	}
-	
-// 	private function formularVeranstaltung($parameter)
-// 	{
-// 		$data['VeranstaltungID'] = $parameter;
-		
-// 		$this->load->model('vera_model');
-					
-// 		$this->form_validation->set_message('required', 'Das Feld %s ist erforderlich.');
-
-// 	    $this->formularVeranstaltung_rules();
-	    
-// 		if ($this->form_validation->run() == FALSE)
-// 		{
-// 			//load the content variables
-// 	 		$this->layout_data['content'] = $this->load->view('form/veranstaltung', $data, true); //Welches Content File geladen werden soll 
-// 			$this->load->view('main', $this->layout_data);
-// 		}
-// 		else
-// 		{
-// 			//load the content variables
-//  			$this->layout_data['content'] = $this->load->view('form/erfolg', NULL, true); //Welches Content File geladen werden soll 
-// 			$this->load->view('main', $this->layout_data);
-// 		}
-// 	}
-	
 	private function datenErfolg()
 	{
-		$this->layout_data['content'] = $this->load->view('form/erfolg', NULL, true); //Welches Content File geladen werden soll 
+		$this->layout_data['content'] = $this->load->view('form/erfolg', NULL, true); //Welches Content File geladen werden soll
 		$this->load->view('main', $this->layout_data);
 	
-	} 
-	
-// 	private function formularKreisverband()
-// 	{//load the content variables
-// 		$this->layout_data['content'] = $this->load->view('form/veranstaltung', $data, true); //Welches Content File geladen werden soll 
-		
-		
-		
-// // 		$data['userform']=getuserformarray();
-		
-// 		if ($this->form_validation->run() == FALSE)
-// 		{
-// 			//load the content variables
-//  			$this->layout_data['content'] = $this->load->view('form/kreisverband', NULL, true); //Welches Content File geladen werden soll 
-// 			$this->load->view('main', $this->layout_data);
-// 		}
-// 		else
-// 		{
-// 			//load the content variables
-//  			$this->layout_data['content'] = $this->load->view('form/erfolg', NULL, true); //Welches Content File geladen werden soll 
-// 			$this->load->view('main', $this->layout_data);
-// 		}
-// 	}
+	}
 }
 
 function base_url($uri = '')
