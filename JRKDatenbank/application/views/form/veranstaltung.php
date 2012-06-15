@@ -4,7 +4,7 @@
 //echo validation_errors(); 
 $this->load->helper('form');
 $this->load->helper('MY_user_helper');
-	
+$this->load->library('table');
 
 if (!isset($_POST['Speichern']))
 {
@@ -281,8 +281,8 @@ echo form_open();
 
 
 <?php echo form_fieldset('Veranstaltungs Daten'); 
-$this->load->library('table');
 
+$this->table->set_heading('', '');
 foreach ($veranstaltungform as $element) {
 
 	

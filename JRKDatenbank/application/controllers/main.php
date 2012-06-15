@@ -44,9 +44,9 @@ class main extends CI_Controller {
 
 			$site = "";
 			switch ($nextWebsite){
-				case 'formular_user':
+				case 'site_neuesMitglied':
 					
-					//Mitglieder Forumlar
+					//Neues Mitglied - Eingabeformular
 					//****************************************************
 					$site = "form/user";
 					$this->formularUser_ValidationRules();
@@ -54,9 +54,9 @@ class main extends CI_Controller {
 					//****************************************************
 					
 					
-				case 'formular_veranstaltungen':
+				case 'site_neueVeranstaltungen':
 					
-					//Veranstaltung Forumlar
+					//Neues Veranstaltung - Eingabeformular
 					//****************************************************
 					$site = "form/veranstaltung";
 					$userdaten['VeranstaltungID'] = "new";
@@ -66,15 +66,36 @@ class main extends CI_Controller {
 					break;
 					//****************************************************
 					
-					
-				case 'formular_kreisverband':
-					
-					//Kreisverband Forumlar
+				case 'site_Kreisverband':
+							
+					//Kreisverband
 					//****************************************************
 					$site = "form/kreisverband";
 					break;
 					//****************************************************
+						
+						
+				case 'site_Mitglieder':
+							
+					//Mitglieder
+					//****************************************************
+					$site = "";
+					//****************************************************
 					
+					
+				case 'site_Veranstaltungen':
+								
+					//Veranstaltungen
+					//****************************************************
+					$site = "";
+					//****************************************************
+				
+				case 'site_position':
+				
+					//Position
+					//****************************************************
+					
+					//****************************************************
 					
 				default:
 					
