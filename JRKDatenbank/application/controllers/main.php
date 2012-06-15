@@ -1,5 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+/*
+ * @Author: Lars Willrich
+ */
 class main extends CI_Controller {
 	
 	private $layout_data;
