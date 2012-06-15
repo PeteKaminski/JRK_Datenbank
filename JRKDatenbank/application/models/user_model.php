@@ -1,5 +1,6 @@
 <?php
 define('DEBUG', 'DEBUG');
+
 class User_model extends CI_Model {
 	/*
 	 *  Das User-Model geht davon aus, dass alle Eingabe geprüft auf XXS und Sqlinjektion geprüft wurden
