@@ -8,7 +8,7 @@ class User_model extends CI_Model {
 	 */
 
 	public function __construct() {
-	    //load the CI instance     
+	    //load the CI instance    
 		$this->load->database();
 	}
 
