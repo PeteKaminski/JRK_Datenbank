@@ -4,7 +4,7 @@
 	   	// Eine Sessin ID wird danach generiert um damit weiter Arbeiten zu können.
 $this->load->helper('form');
 
-echo form_open('main/index');
+echo form_open('main/index/main');
 echo "Testlogin mit</br> User: test</br>";
 echo "Passwort: test";
 echo form_input('username', 'User');
