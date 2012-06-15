@@ -21,14 +21,14 @@ class main extends CI_Controller {
 	}
 	
 	
-	//Funktion, welche zur nächsten Seite wechselt
+	//Funktion, welche zur nï¿½chsten Seite wechselt
 	function changeWebsite($nextWebsite){
 		
-		//Anzeigen, die unabhängig vom Login angezeigt werden
+		//Anzeigen, die unabhï¿½ngig vom Login angezeigt werden
 		$this->layout_data['pageTitle'] = "JRK - Mitgliederverwaldung";
 		$this->layout_data['header'] = $this->load->view('header',NULL,true);
 		
-		//Abfrage, ob Session gültig
+		//Abfrage, ob Session gï¿½ltig
 		if ($this->isSessionValid() == 1){
 			//Change Website
 			$this->layout_data['navigation'] = $this->load->view('navigation',NULL,true);
@@ -99,7 +99,7 @@ class main extends CI_Controller {
 					
 				default:
 					
-					//Begrüßung Site
+					//Begrï¿½ï¿½ung Site
 					//****************************************************
 					$site = "overview";
 					$this->load->model('model');
@@ -121,10 +121,10 @@ class main extends CI_Controller {
 			$this->load->view('main', $this->layout_data);
 			
 		}else{
-			//Session ungültig
+			//Session ungï¿½ltig
 			//****************************************************
 			
-			//Überprüfung des Passwortes
+			//ï¿½berprï¿½fung des Passwortes
 			if ($this->input->post('username_pw') == "test"){
 				$this->session->set_userdata('last_activity', now());
 				$this->changeWebsite($nextWebsite);
@@ -171,7 +171,7 @@ class main extends CI_Controller {
 	
 	}
 	
-	private function testdb()
+	public function testdb()
 	{
 		$this->load->model('User_model');
 		$this->load->model('Dbuser_model');
