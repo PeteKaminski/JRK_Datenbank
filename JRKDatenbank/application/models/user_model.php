@@ -29,9 +29,9 @@ class User_model extends CI_Model {
 
         If (defined('DEBUG')) {
             echo '<div id="debug">';
-            echo "[" + __FUNCTION__ + "] input: \$userID = $userID;";
-            echo "SQL Query [" + __FUNCTION__ + "]: " . $query;
-            echo "SQL Antwort  [" + __FUNCTION__ + "]: " . $DBAnswer;
+            echo "<p>[get_user] input: \$userID = $userID</p>";
+            echo "<p>SQL Query [get_user: " . $query.'</p>';
+            echo "<p>SQL Antwort  [get_user]: " . $DBAnswer.'</p>';
             echo '</div>';
         }
 

@@ -1,15 +1,14 @@
 <?php
 
-class Vera_model extends CI_Model {
+class Kreis_model extends CI_Model {
 
     function __construct() {
-        // Call the Model constructor
-        //parent::__construct();
+
         $this -> load -> database();
     }
 
-    function getVeranstaltung($verID = FALSE) {
-        if ($verID == FALSE) {
+    function getKreisverband($kreisID = FALSE) {
+        if ($kreisID == FALSE) {
             return FALSE;
         }
 
@@ -17,7 +16,7 @@ class Vera_model extends CI_Model {
          * SELECT * FROM Persons WHERE UserID=1;
          */
 
-        $query = "SELECT * FROM `veranstaltung` WHERE VeranstaltungID = $verID;";
+        $query = "SELECT * FROM `kreisverband` WHERE KreisverbandID = $kreisID;";
 
         $DBAnswer = $this -> db -> query($query);
 
@@ -25,9 +24,9 @@ class Vera_model extends CI_Model {
 
         If (defined('DEBUG')) {
             echo '<div id="debug">';
-            echo "<p>[getVeranstaltung] input: \$verID = $verID;</p>";
-            echo "<p>SQL Query [getVeranstaltung]: " . $query . '</p>';
-            echo "<p>SQL Antwort  [getVeranstaltung]: </p>";
+            echo "<p>[getKreisverband] input: \$kreisID = $kreisID;</p>";
+            echo "<p>SQL Query [getKreisverband]: " . $query . '</p>';
+            echo "<p>SQL Antwort  [getKreisverband]: </p>";
             echo '</div>';
         }
 
@@ -47,68 +46,30 @@ class Vera_model extends CI_Model {
         }
         return $data;
     }
-
-    public function transformToTimestamp($year = FALSE, $month = FALSE, $day = FALSE, $hour = FALSE, $minute = FALSE) {
-        if (!$year || !$month || !$day || !$hour || !$minute) {
+    
+        public function updateKreisverband($kreisID = FALSE, $data){
+        if( !$kreisID ){
             return FALSE;
         }
-
-        // Bsp.: '2005-05-13 07:15:31'
-
-        return "$year-$month-$day $hour:$minute:00";
-    }
-
-    public function transformFromTimestamp($timestamp = FALSE) {
-        if (!$timestamp) {
-            return FALSE;
-        }
-
-        // Bsp.: '2005-05-13 07:15:31'
-
-        $tmp = explode(' ', $timestamp);
-        if (count($tmp) < 2) {
-            return FALSE;
-        }
-
-        $year = explode('-', $tmp[0]);
-        if (count($year) < 3) {
-            return FALSE;
-        }
-
-        $time = explode(':', $tmp[1]);
-        if (count($time) < 3) {
-            return FALSE;
-        }
-
-        $result = array('Jahr' => $year[0], 'Monat' => $year[1], 'Tag' => $year[2], 'Stunde' => $time[0], 'Minute' => $time[1], 'Sekunde' => $time[2]);
-
-        return $result;
-    }
-
-    public function updateVeranstaltung($veraID = FALSE, $data){
-        if( !$veraID ){
-            return FALSE;
-        }
+        //KreisverbandID    Abkuerzung  Kreisjugendleiter   Kreisjugendleiter2  Ortsteil    Ort     Strasse     Hausnr  Plz 
+        $data = $this->prepareArray($data, array('Abkuerzung', 'Kreisjugendleiter', 'Kreisjugendleiter2', 'Ortsteil', 'Ort', 'Strasse', 'Hausnr', 'Plz'));
         
-        $data = $this->prepareArray($data, array('Thema', 'Art', 'Name', 'Ort', 'Strasse', 'Plz', 'Hausnr', 'DatumBegin', 'DatumEnde', 'MaxTeilnehmer', 'Leistung', 'TnBeitrag'));
-        
-        if(is_numeric($veraID)){
-            return $this->updateVera($veraID, $data);
+        if(is_numeric($kreisID)){
+            return $this->updateKreis($kreisID, $data);
         }else{
-            return $this->createVera($data);
+            return $this->createKreis($data);
         }
     }
 
-    private function createVera($data) {
-        //$data = $this -> prepareArray($data, array('Thema', 'Art', 'Name', 'Ort', 'Strasse', 'Plz', 'Hausnr', 'DatumBegin', 'DatumEnde', 'MaxTeilnehmer', 'Leistung', 'TnBeitrag'));
+    private function createKreis($data) {
 
-        $query_front = 'INSERT INTO `veranstaltung` (';
+        $query_front = 'INSERT INTO `kreisverband` (';
         $query_back = 'VALUES (';
 
         // fuer den ersten DB-Wert, damit er kein Komma schreibt
         $isNotFirstEntry = FALSE;
 
-        if ($data['Thema'] == FALSE || $data['Art'] == FALSE || $data['Name'] == FALSE || $data['Ort'] == FALSE || $data['DatumBegin'] == FALSE || $data['DatumEnde'] == FALSE || $data['MaxTeilnehmer'] == FALSE || $data['TnBeitrag'] == FALSE || $data['Leistung'] == FALSE) {
+        if ($data['Abkuerzung'] == FALSE || $data['Ortsteil'] == FALSE) {
             return false;
         }
 
@@ -131,12 +92,12 @@ class Vera_model extends CI_Model {
 
         If (defined('DEBUG')) {
             echo '<div id="debug">';
-            echo "<p>[createVera] input:</p>";
+            echo "<p>[createKreis] input:</p>";
             echo '<pre>';
             print_r($data);
             echo '</pre>';
-            echo "<p>SQL Query [createVera]: " . $query_front . $query_back . '</p>';
-            echo "<p>SQL Antwort  [createVera]: " . $this -> db -> insert_id() . '</p>';
+            echo "<p>SQL Query [createKreis]: " . $query_front . $query_back . '</p>';
+            echo "<p>SQL Antwort  [createKreis]: " . $this -> db -> insert_id() . '</p>';
             echo '</div>';
         }
 
@@ -147,13 +108,13 @@ class Vera_model extends CI_Model {
         }
     }
     
-    private function updateVera($veraID = FALSE, $data){
+    private function updateKreis($kreisID = FALSE, $data){
         /*
          * SQL UPDATE Bsp.: UPDATE Persons SET Address='Nissestien 67', City='Sandnes'
          * WHERE LastName='Tjessem' AND FirstName='Jakob'
          */
-         $query_front = 'UPDATE `veranstaltung` SET ';
-        $query_back = "WHERE VeranstaltungID=$veraID";
+         $query_front = 'UPDATE `kreisverband` SET ';
+        $query_back = "WHERE    KreisverbandID=$kreisID";
 
         // fuer den ersten DB-Wert, damit er kein Komma schreibt
         $isNotFirstEntry = FALSE;
@@ -172,12 +133,12 @@ class Vera_model extends CI_Model {
 
         If (defined('DEBUG')) {
             echo '<div id="debug">';
-            echo "<p>[updateVera] input:</p>";
+            echo "<p>[updateKreis] input:</p>";
             echo '<pre>';
             print_r($data);
             echo '</pre>';
-            echo "<p>SQL Query [updateVera]: " . $query_front . $query_back . '</p>';
-            echo "<p>SQL Antwort  [updateVera]: " . $this -> db -> affected_rows(). '</p>';
+            echo "<p>SQL Query [updateKreis]: " . $query_front . $query_back . '</p>';
+            echo "<p>SQL Antwort  [updateKreis]: " . $this -> db -> affected_rows(). '</p>';
             echo '</div>';
         }
 
@@ -189,6 +150,5 @@ class Vera_model extends CI_Model {
             return FALSE;
         }
     }
-
 }
 ?>

@@ -50,6 +50,7 @@ class main extends CI_Controller {
                     $this -> load -> model('User_model');
                     $this -> load -> model('Dbuser_model');
                     $this -> load -> model('Vera_model');
+                    $this -> load -> model('Kreis_model');
                     $site = 'test_db';
                     break;
                 case 'site_neuesMitglied' :
