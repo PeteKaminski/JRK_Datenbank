@@ -188,6 +188,8 @@ class main extends CI_Controller {
 function base_url($uri = '') {
     $CI = &get_instance();
     return $CI -> config -> base_url($uri);
+    //vlt. ne alternative die schneller ist!
+    //return $this->ci->config->base_url($uri);
 }
 
 /* End of file welcome.php */
