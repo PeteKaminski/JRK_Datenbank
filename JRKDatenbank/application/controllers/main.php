@@ -93,9 +93,9 @@ class main extends CI_Controller {
 
                     //Veranstaltungen
                     //****************************************************
-                    $this->load->library('table');
+                    /*$this->load->library('table');
                     $site = "form/vtabelle";
-		            $this->load->view('main', $this->layout_data);
+		            $this->load->view('main', $this->layout_data);*/
                 //****************************************************
 
                 case 'site_position' :
